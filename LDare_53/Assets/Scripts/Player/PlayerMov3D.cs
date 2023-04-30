@@ -29,6 +29,5 @@ public class PlayerMov3D : MonoBehaviour
         moveDirection = new Vector3(input.x, 0f, input.y).normalized;
         //playerRb.AddForce(moveDirection * moveSpeed * 100f * Time.deltaTime, ForceMode.Force);
         playerRb.velocity = moveDirection * moveSpeed;
-
     }
 }
