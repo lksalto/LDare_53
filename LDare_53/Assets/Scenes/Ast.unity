@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 3b7d6996a1dd50a4db407e11cc8307e1, type: 2}
 --- !u!1 &30440514
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +157,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  isOnRoad: 0
+  isOnGrass: 0
+  boxSize: {x: 0, y: 0, z: 0}
+  maxDistance: 0
+  grassLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  roadLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &30440516
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -451,9 +461,9 @@ GameObject:
   - component: {fileID: 385025573}
   - component: {fileID: 385025575}
   - component: {fileID: 385025574}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Road
-  m_TagString: Untagged
+  m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -757,9 +767,9 @@ GameObject:
   - component: {fileID: 937789553}
   - component: {fileID: 937789552}
   - component: {fileID: 937789551}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1107,9 +1117,9 @@ GameObject:
   - component: {fileID: 2024165984}
   - component: {fileID: 2024165986}
   - component: {fileID: 2024165985}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Road (1)
-  m_TagString: Untagged
+  m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
