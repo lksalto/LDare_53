@@ -59,6 +59,16 @@ public class PlayerShoot : MonoBehaviour
 
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
         aimTransform.eulerAngles = new Vector3(0, 0, angle);
+
+        if (aimDirection.x < 0)
+        {
+            aimTransform.eulerAngles = new Vector3(180, 0, -angle);
+            gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 
 }
