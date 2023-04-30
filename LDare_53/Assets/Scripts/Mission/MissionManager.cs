@@ -39,8 +39,8 @@ public class MissionManager : MonoBehaviour
         {
             houses.Add(house);
         }
+        chosenHouses = new List<int>();
         GenerateNextHouse();
-
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
