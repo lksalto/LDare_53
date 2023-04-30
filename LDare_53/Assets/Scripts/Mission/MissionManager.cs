@@ -4,27 +4,27 @@ using UnityEngine;
 using CodeMonkey.Utils;
 public class MissionManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> houses;
-    [SerializeField] Vector3 targetPosition;
-
-    [SerializeField] Camera uiCamera;
+    List<GameObject> houses;
+    Vector3 targetPosition;
 
     GameObject pointer;
     private RectTransform pointerRectTransform;
     GameObject player;
-    GameObject target;
+    public GameObject target;
     SpriteRenderer targetSpriteRenderer;
     SpriteChanger targetSpriteScript;
-    List<int> chosenHouses;
+    List<GameObject> chosenHouses;
 
-    [SerializeField] bool isOffScreen;
-    [SerializeField]float borderSize = 100f;
+    bool isOffScreen;
+    float borderSize = 40f;
+    public int numberOfDeliveries = 3;
 
-    [SerializeField] float angle;
-    [SerializeField] Vector3 dir;
-    [SerializeField] Vector3 cappedTargetScreenPosition;
-    [SerializeField] Vector3 targetPositionScreenPoint;
-    [SerializeField] Vector3 pointerPosition;
+
+    float angle;
+    Vector3 dir;
+    Vector3 cappedTargetScreenPosition;
+    Vector3 targetPositionScreenPoint;
+    int randomNumber;
     private void Awake()
     {
         pointer = GameObject.FindGameObjectWithTag("Pointer");
@@ -39,63 +39,52 @@ public class MissionManager : MonoBehaviour
         {
             houses.Add(house);
         }
-        chosenHouses = new List<int>();
+        chosenHouses = new List<GameObject>();
         GenerateNextHouse();
         player = GameObject.FindGameObjectWithTag("Player");
+
     }
 
-    void GenerateNextHouse()
+    public void GenerateNextHouse()
     {
-        int randomNumber = Random.Range(0, houses.Count);
-        while(chosenHouses.Contains(randomNumber))
+        Debug.Log(randomNumber + " " + houses.Count);
+        if (houses.Count != 0 && numberOfDeliveries > 0)
         {
             randomNumber = Random.Range(0, houses.Count);
+            while (chosenHouses.Contains(houses[randomNumber]))
+            {
+                randomNumber = Random.Range(0, houses.Count);
+            }
         }
-        chosenHouses.Add(randomNumber);
-       
-        target = houses[randomNumber];
-        targetPosition = target.transform.position;
-        targetSpriteRenderer = target.GetComponent<SpriteRenderer>();
-        targetSpriteScript = target.GetComponent<SpriteChanger>();
+        if (numberOfDeliveries > 0 && houses.Count != 0)
+        {
+            chosenHouses.Add(houses[randomNumber]);
+
+            target = houses[randomNumber];
+            targetPosition = target.transform.position;
+            targetSpriteRenderer = target.GetComponent<SpriteRenderer>();
+            targetSpriteScript = target.GetComponent<SpriteChanger>();
+
+            houses.Remove(houses[randomNumber]);
+        }
+        else
+        {
+            targetSpriteRenderer.sprite = targetSpriteScript.house;
+            //Acabar o jogo
+        }
     }
 
+    public void ResetHouseSprite()
+    {
+        targetSpriteRenderer.sprite = targetSpriteScript.house;
+        target = null;
+    }
 
 
     // Update is called once per frame
     void Update()
     {
         LookAtTarget();
-
-        /*
-        Vector3 toPosition = targetPosition;
-        //Vector3 fromPosition = Camera.main.transform.position; // mudar p player?
-        Vector3 fromPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-
-        fromPosition.y = 0f;
-        dir = (toPosition - fromPosition).normalized;
-        angle = UtilsClass.GetAngleFromVectorFloat(dir);
-        //angle = Vector3.Angle(fromPosition, toPosition);
-        pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle);
-        Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
-        isOffScreen = targetPositionScreenPoint.x < borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize;
-
-        if(isOffScreen)
-        {
-            Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
-            if (cappedTargetScreenPosition.x <= borderSize)
-                cappedTargetScreenPosition.x = borderSize;
-            if (cappedTargetScreenPosition.x >= Screen.width - borderSize)
-                cappedTargetScreenPosition.x = Screen.width - borderSize;
-            if (cappedTargetScreenPosition.y <= borderSize)
-                cappedTargetScreenPosition.y = borderSize;
-            if (cappedTargetScreenPosition.y >= Screen.height - borderSize)
-                cappedTargetScreenPosition.y = Screen.height - borderSize;
-
-            //Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(cappedTargetScreenPosition);
-            //pointerRectTransform.position = pointerWorldPosition;
-            //pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
-        }
-        //*/
     }
 
     void LookAtTarget()
@@ -108,7 +97,7 @@ public class MissionManager : MonoBehaviour
 
         isOffScreen = targetPositionScreenPoint.x <= borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize;
 
-        if (isOffScreen)
+        if (isOffScreen && target != null)
         {
             targetSpriteRenderer.sprite = targetSpriteScript.house;
             pointer.SetActive(true);
@@ -122,13 +111,10 @@ public class MissionManager : MonoBehaviour
             if (cappedTargetScreenPosition.y >= Screen.height - borderSize)
                 cappedTargetScreenPosition.y = Screen.height - borderSize;
 
-            pointerPosition = pointerRectTransform.localPosition;
+            Vector3 pointerPosition = pointerRectTransform.localPosition;
             pointerRectTransform.position = cappedTargetScreenPosition;
-            //Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(cappedTargetScreenPosition);
-            //pointerRectTransform.position = pointerWorldPosition;
-            //pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
         }
-        else
+        else if(!isOffScreen && target != null)
         {
             targetSpriteRenderer.sprite = targetSpriteScript.houseHighlight;
             pointer.SetActive(false);
