@@ -26,7 +26,7 @@ public class DogBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other) {
         if(other.gameObject.tag == "Player"){
-            Debug.Log("I see you mailman");
+            //Debug.Log("I see you mailman");
             dog.speed = 15;
             dog.SetDestination(other.gameObject.transform.position);
         }
@@ -35,7 +35,7 @@ public class DogBehaviour : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.gameObject.tag == "Player"){
             state = states.PATROL;
-            Debug.Log("Must've been the wind");
+            //Debug.Log("Must've been the wind");
             dog.speed = 10;
             StartCoroutine(Patrulhar());
         }
@@ -50,7 +50,7 @@ public class DogBehaviour : MonoBehaviour
         while(state == states.PATROL){
             if(dog.velocity == Vector3.zero){
                 randomPoint = GetRandomPatrolPoint();
-                Debug.Log(randomPoint);
+                //Debug.Log(randomPoint);
             }
             dog.SetDestination(randomPoint);
             yield return null;
