@@ -13,28 +13,60 @@ public class Throwing : MonoBehaviour
     public Color maxChargeColor = Color.red;
 
     private float chargeTimer = 0f;
+    private AudioSource audSource;
+
+    [SerializeField] List<AudioClip> chargeClips;
+    [SerializeField] List<AudioClip> pointClips;
+    [SerializeField] List<AudioClip> throwClips;
+
+    [SerializeField] int maxPackg;
+    public int pckgCount;
+
+
     private void Start()
     {
+        pckgCount = maxPackg;
+        audSource = GetComponent<AudioSource>();
         chargeBar.fillAmount = 0f;
     }
     void Update()
     {
         if (Input.GetMouseButton(0))
         {
-            chargeTimer += Time.deltaTime;
-            chargeBar.fillAmount = chargeTimer / chargeTime;
-            chargeBar.color = Color.Lerp(minChargeColor, maxChargeColor, chargeTimer / chargeTime);
+            if (pckgCount > 0)
+            {
+                chargeTimer += Time.deltaTime;
+                chargeBar.fillAmount = chargeTimer / chargeTime;
+                chargeBar.color = Color.Lerp(minChargeColor, maxChargeColor, chargeTimer / chargeTime);
+                if (chargeBar.color == maxChargeColor)
+                {
+                    audSource.Stop();
+                }
+            }
+
         }
 
+        if(Input.GetMouseButtonDown(0))
+        {
+            if (pckgCount > 0)
+                PlayChargeClip();
+        }
         if (Input.GetMouseButtonUp(0))
         {
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            Vector3 direction = GetDirectionToMouse();
-            rb.AddForce(direction * (chargeBar.fillAmount) * 3 * throwForce);
-            chargeTimer = 0f;
-            chargeBar.color = minChargeColor;
-            chargeBar.fillAmount = 0;
+            if(pckgCount > 0)
+            {
+                audSource.Stop();
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                Vector3 direction = GetDirectionToMouse();
+                rb.AddForce(direction * (chargeBar.fillAmount) * 3 * throwForce);
+                chargeTimer = 0f;
+                chargeBar.color = minChargeColor;
+                chargeBar.fillAmount = 0;
+                PlayThrowClip();
+                pckgCount--;
+            }
+
         }
     }
     private Vector3 GetDirectionToMouse()
@@ -47,4 +79,31 @@ public class Throwing : MonoBehaviour
         direction.Normalize();
         return direction;
     }
+
+    public void PlayChargeClip()
+    {
+        AudioClip clipToPlay = chargeClips[Random.Range(0, chargeClips.Count - 1)];
+        audSource.PlayOneShot(clipToPlay);
+    }
+
+    public void PlayPointClip()
+    {
+        AudioClip clipToPlay = pointClips[Random.Range(0, pointClips.Count - 1)];
+        audSource.PlayOneShot(clipToPlay);
+    }
+
+    public void PlayThrowClip()
+    {
+        audSource.PlayOneShot(throwClips[Random.Range(0, throwClips.Count - 1)]);
+
+    }
+
+    public void AddPackage()
+    {
+        if(pckgCount < maxPackg)
+        {
+            pckgCount++;
+        }
+    }
+
 }
