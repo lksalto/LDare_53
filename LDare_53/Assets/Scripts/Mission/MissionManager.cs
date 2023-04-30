@@ -11,8 +11,8 @@ public class MissionManager : MonoBehaviour
     private RectTransform pointerRectTransform;
     GameObject player;
     public GameObject target;
-    SpriteRenderer targetSpriteRenderer;
-    SpriteChanger targetSpriteScript;
+    [SerializeField] SpriteRenderer targetSpriteRenderer;
+    [SerializeField] SpriteChanger targetSpriteScript;
     List<GameObject> chosenHouses;
 
     bool isOffScreen;
@@ -35,7 +35,7 @@ public class MissionManager : MonoBehaviour
     void Start()
     {
         houses = new List<GameObject>();
-        foreach(GameObject house in GameObject.FindGameObjectsWithTag("House"))
+        foreach(GameObject house in GameObject.FindGameObjectsWithTag("Yard"))
         {
             houses.Add(house);
         }
@@ -62,8 +62,8 @@ public class MissionManager : MonoBehaviour
 
             target = houses[randomNumber];
             targetPosition = target.transform.position;
-            targetSpriteRenderer = target.GetComponent<SpriteRenderer>();
-            targetSpriteScript = target.GetComponent<SpriteChanger>();
+            targetSpriteScript = target.GetComponentInChildren<SpriteChanger>();
+            targetSpriteRenderer = targetSpriteScript.GetSpriteRenderer();
 
             houses.Remove(houses[randomNumber]);
         }
