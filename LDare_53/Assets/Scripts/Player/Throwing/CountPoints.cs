@@ -6,9 +6,10 @@ public class CountPoints : MonoBehaviour
 {
     [SerializeField] bool inRange = false;
     [SerializeField] bool canPick = false;
+    [SerializeField] bool hasPicked = false;
     [SerializeField] Transform target;
     Rigidbody rb;
-    [SerializeField] float maxCount = 3;
+    [SerializeField] float maxCount = 1.3f;
     Throwing playerSound;
     private float undetect = 0f;
 
@@ -42,6 +43,10 @@ public class CountPoints : MonoBehaviour
         {
             playerSound.PlayPointClip();
         }
+        if(hasPicked)
+        {
+            playerSound.AddPackage();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -55,6 +60,11 @@ public class CountPoints : MonoBehaviour
             }
 
         }
+        if (other.gameObject.CompareTag("Player") && canPick && undetect > 1f)
+        {
+            hasPicked = true;
+            Destroy(gameObject);
+        }
 
 
     }
@@ -63,12 +73,11 @@ public class CountPoints : MonoBehaviour
         if(other.gameObject.CompareTag("Target"))
         {
             inRange = true;
-            //Destroy(gameObject, 3f);
         }
 
         if (other.gameObject.CompareTag("Player") && canPick && undetect > 1f)
         {
-            playerSound.AddPackage();
+            
             Destroy(gameObject);
         }
 

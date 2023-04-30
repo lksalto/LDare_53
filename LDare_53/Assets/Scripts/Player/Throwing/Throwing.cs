@@ -13,8 +13,8 @@ public class Throwing : MonoBehaviour
     public Color maxChargeColor = Color.red;
 
     private float chargeTimer = 0f;
-    private AudioSource audSource;
-
+    [SerializeField] AudioSource audSource;
+    [SerializeField] AudioSource audSourceCharge;
     [SerializeField] List<AudioClip> chargeClips;
     [SerializeField] List<AudioClip> pointClips;
     [SerializeField] List<AudioClip> throwClips;
@@ -22,15 +22,17 @@ public class Throwing : MonoBehaviour
     [SerializeField] int maxPackg;
     public int pckgCount;
 
+    public GameMaster gm;
 
     private void Start()
     {
         pckgCount = maxPackg;
-        audSource = GetComponent<AudioSource>();
+        //audSource = GetComponent<AudioSource>();
         chargeBar.fillAmount = 0f;
     }
     void Update()
     {
+        gm.CountTotalBoxes(pckgCount, maxPackg);
         if (Input.GetMouseButton(0))
         {
             if (pckgCount > 0)
@@ -40,7 +42,7 @@ public class Throwing : MonoBehaviour
                 chargeBar.color = Color.Lerp(minChargeColor, maxChargeColor, chargeTimer / chargeTime);
                 if (chargeBar.color == maxChargeColor)
                 {
-                    audSource.Stop();
+                    audSourceCharge.Stop();
                 }
             }
 
@@ -55,7 +57,7 @@ public class Throwing : MonoBehaviour
         {
             if(pckgCount > 0)
             {
-                audSource.Stop();
+                audSourceCharge.Stop();
                 GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
                 Rigidbody rb = projectile.GetComponent<Rigidbody>();
                 Vector3 direction = GetDirectionToMouse();
@@ -65,6 +67,7 @@ public class Throwing : MonoBehaviour
                 chargeBar.fillAmount = 0;
                 PlayThrowClip();
                 pckgCount--;
+                
             }
 
         }
@@ -83,7 +86,7 @@ public class Throwing : MonoBehaviour
     public void PlayChargeClip()
     {
         AudioClip clipToPlay = chargeClips[Random.Range(0, chargeClips.Count - 1)];
-        audSource.PlayOneShot(clipToPlay);
+        audSourceCharge.PlayOneShot(clipToPlay);
     }
 
     public void PlayPointClip()
@@ -102,7 +105,7 @@ public class Throwing : MonoBehaviour
     {
         if(pckgCount < maxPackg)
         {
-            pckgCount++;
+            pckgCount+=1;
         }
     }
 
