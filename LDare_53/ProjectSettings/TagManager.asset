@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Bullet
   - EnemyBullet
+  - Package
+  - Target
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - Enemy
   - Bullet
   - EnemyBullet
-  - 
-  - 
+  - Package
+  - Target
   - 
   - 
   - 
