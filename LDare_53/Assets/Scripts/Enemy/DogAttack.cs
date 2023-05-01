@@ -11,7 +11,7 @@ public class DogAttack : MonoBehaviour
             Throwing player = other.gameObject.GetComponent<Throwing>();
             if(player.pckgCount > 0)
                 player.ThrowBox(0);
-            else gm.ResetLevel();
+            else gm.RestartLevel();
         }
     }
 }

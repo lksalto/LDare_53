@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2853507423218083944}
   - component: {fileID: 2853507423218083947}
   - component: {fileID: 2853507423218083945}
+  - component: {fileID: 6273428550938989953}
   m_Layer: 22
   m_Name: Building
   m_TagString: House
@@ -113,6 +114,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   house: {fileID: 21300000, guid: a016e529b33e6cb46bf4fdcf2debea0a, type: 3}
   houseHighlight: {fileID: 21300000, guid: 5a532940853e02c43834b4425c8b1fb1, type: 3}
+--- !u!208 &6273428550938989953
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2853507423218083957}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1910001, y: 1.185, z: 0.345}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.29, z: -0.35}
+  m_TimeToStationary: 0.5
 --- !u!1 &2853507424395718184
 GameObject:
   m_ObjectHideFlags: 0
