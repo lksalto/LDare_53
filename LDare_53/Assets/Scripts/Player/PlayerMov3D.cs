@@ -11,7 +11,8 @@ public class PlayerMov3D : MonoBehaviour
     Animator animator;
     bool isFacingLeft;
 
-
+    [SerializeField] GameObject horShadow;
+    [SerializeField] GameObject verShadow;
     [SerializeField] float moveSpeed;
     [SerializeField] bool isOnRoad;
     [SerializeField] bool isOnGrass;
@@ -68,6 +69,17 @@ public class PlayerMov3D : MonoBehaviour
         {
             isFacingLeft = false;
             FlipPlayer();
+        }
+
+        if(animator.GetBool("IsHorizontal"))
+        {
+            verShadow.SetActive(false);
+            horShadow.SetActive(true);
+        }
+        else if(!animator.GetBool("IsIdle"))
+        {
+            horShadow.SetActive(false);
+            verShadow.SetActive(true);
         }
 
         //playerRb.AddForce(moveDirection * moveSpeed * 100f * Time.deltaTime, ForceMode.Force);

@@ -45,6 +45,7 @@ public class GameMaster : MonoBehaviour
         txtDel.GetComponent<TextMeshProUGUI>().text = (playerBoxes.maxPackg - playerBoxes.pckgCount).ToString() + "/" + playerBoxes.maxPackg.ToString();
     }
 
+
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
