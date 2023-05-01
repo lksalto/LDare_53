@@ -5,6 +5,7 @@ using UnityEngine;
 public class LayersHandler : MonoBehaviour
 {
     SpriteRenderer playerSpriteRenderer;
+    public int layerDiff = 2;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,7 +21,7 @@ public class LayersHandler : MonoBehaviour
         if (other.tag == "Player")
         {
             playerSpriteRenderer = other.GetComponentInChildren<SpriteRenderer>();
-            playerSpriteRenderer.sortingOrder = GetComponentInParent<SpriteRenderer>().sortingOrder + 1;
+            playerSpriteRenderer.sortingOrder = -7;
         }
     }
 }
