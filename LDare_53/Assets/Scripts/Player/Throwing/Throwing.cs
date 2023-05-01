@@ -18,14 +18,16 @@ public class Throwing : MonoBehaviour
     [SerializeField] List<AudioClip> chargeClips;
     [SerializeField] List<AudioClip> pointClips;
     [SerializeField] List<AudioClip> throwClips;
-
-    [SerializeField] int maxPackg;
+    [SerializeField] MissionManager mm;
+    [SerializeField] GameObject chargeBarBG;
+    public int maxPackg;
     public int pckgCount;
 
     public GameMaster gm;
 
     private void Start()
     {
+        maxPackg = mm.numberOfDeliveries;
         pckgCount = maxPackg;
         //audSource = GetComponent<AudioSource>();
         chargeBar.fillAmount = 0f;
@@ -53,10 +55,12 @@ public class Throwing : MonoBehaviour
         {
             if (pckgCount > 0)
                 PlayChargeClip();
+                chargeBarBG.SetActive(true);
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if(pckgCount > 0)
+            chargeBarBG.SetActive(false);
+            if (pckgCount > 0)
             {
                 audSourceCharge.Stop();
                 Vector3 direction = GetDirectionToMouse();

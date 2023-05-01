@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 1565778413235765027}
   - component: {fileID: 1565778413235765024}
   - component: {fileID: 1565778413235765026}
+  - component: {fileID: 6047798213365217114}
   m_Layer: 22
   m_Name: Building
   m_TagString: House
@@ -187,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 1565778413235765054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.353, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.4442731}
+  m_LocalScale: {x: 0.3640839, y: 0.3640839, z: 0.4442731}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1565778413055448185}
@@ -252,7 +253,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565778413235765054}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71205184454bea1419c8a71509a39c11, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -272,3 +273,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   house: {fileID: 21300000, guid: 2751be83feb0e754d86cc0de08c5e879, type: 3}
   houseHighlight: {fileID: 21300000, guid: 87ef4b46b0d726f4e89af96b1920b1bc, type: 3}
+--- !u!208 &6047798213365217114
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565778413235765054}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1910001, y: 1.185, z: 0.345}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.29, z: -0.35}
+  m_TimeToStationary: 0.5

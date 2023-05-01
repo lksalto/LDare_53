@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8679715150056226276}
   - component: {fileID: 8679715150056226277}
   - component: {fileID: 8679715150056226275}
+  - component: {fileID: 1202145356}
   m_Layer: 0
   m_Name: Tree_01 (1)
   m_TagString: Untagged
@@ -94,13 +95,29 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8679715150056226279}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71205184454bea1419c8a71509a39c11, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.31
   m_Height: 2.63
   m_Direction: 2
   m_Center: {x: 0, y: -0.77, z: 0}
+--- !u!208 &1202145356
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679715150056226279}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.325, y: 0.255, z: 0.385}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.84, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8679715150275429151
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,8 +162,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.54, y: 0.21, z: 0.27}
-  m_Center: {x: 0, y: -0.27, z: 1.6422825e-16}
+  m_Size: {x: 0.54, y: 0.372494, z: 0.27}
+  m_Center: {x: 0, y: -0.35124728, z: -5.550628e-16}
 --- !u!114 &8679715150275429149
 MonoBehaviour:
   m_ObjectHideFlags: 0
