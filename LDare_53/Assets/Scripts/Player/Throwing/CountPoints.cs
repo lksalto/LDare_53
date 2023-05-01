@@ -14,11 +14,12 @@ public class CountPoints : MonoBehaviour
     private float undetect = 0f;
 
     float count;
-
+    MissionManager missionScript;
     void Start()
     {
         playerSound = FindObjectOfType<Throwing>();
         rb = GetComponent<Rigidbody>();
+        missionScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<MissionManager>();
     }
 
     // Update is called once per frame
@@ -42,8 +43,11 @@ public class CountPoints : MonoBehaviour
         if(inRange)
         {
             playerSound.PlayPointClip();
+            missionScript.numberOfDeliveries--;
+            missionScript.ResetHouseSprite();
+            missionScript.GenerateNextHouse();
         }
-        if(hasPicked)
+        if (hasPicked)
         {
             playerSound.AddPackage();
         }
@@ -51,7 +55,7 @@ public class CountPoints : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Target"))
+        if (other.gameObject == missionScript.target)
         {
             count += Time.deltaTime;
             if(count > maxCount)
@@ -60,7 +64,7 @@ public class CountPoints : MonoBehaviour
             }
 
         }
-        if (other.gameObject.CompareTag("Player") && canPick && undetect > 1f)
+        if (other.gameObject.CompareTag("PickupSphere") && canPick && undetect > 1f)
         {
             hasPicked = true;
             Destroy(gameObject);
@@ -70,12 +74,12 @@ public class CountPoints : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Target"))
+        if (other.gameObject == missionScript.target)
         {
             inRange = true;
         }
 
-        if (other.gameObject.CompareTag("Player") && canPick && undetect > 1f)
+        if (other.gameObject.CompareTag("PickupSphere") && canPick && undetect > 1f)
         {
             
             Destroy(gameObject);
@@ -84,11 +88,13 @@ public class CountPoints : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Target"))
+        if (other.gameObject == missionScript.target)
         {
             canPick = true;
             inRange = false;
             count = 0;
         }
     }
+
+    
 }

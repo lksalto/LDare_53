@@ -4,11 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - Bullet
-  - EnemyBullet
+  - Road
+  - Pointer
+  - House
+  - Grass
   - Package
   - Target
+  - Enemy
+  - Bullet
+  - GameManager
+  - PickupSphere
+  - Yard
   layers:
   - Default
   - TransparentFX
@@ -29,11 +35,11 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PickupSphere
+  - Grass
+  - Road
+  - House
+  - Yard
   - 
   - 
   - 
