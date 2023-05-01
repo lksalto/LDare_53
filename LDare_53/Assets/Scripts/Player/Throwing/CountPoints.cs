@@ -88,7 +88,7 @@ public class CountPoints : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Target"))
+        if (other.gameObject == missionScript.target)
         {
             canPick = true;
             inRange = false;
