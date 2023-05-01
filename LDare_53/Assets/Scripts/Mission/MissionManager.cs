@@ -11,8 +11,8 @@ public class MissionManager : MonoBehaviour
     private RectTransform pointerRectTransform;
     GameObject player;
     public GameObject target;
-    [SerializeField] SpriteRenderer targetSpriteRenderer;
-    [SerializeField] SpriteChanger targetSpriteScript;
+    SpriteRenderer targetSpriteRenderer;
+    SpriteChanger targetSpriteScript;
     List<GameObject> chosenHouses;
 
     bool isOffScreen;
