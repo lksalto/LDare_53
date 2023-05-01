@@ -12,6 +12,7 @@ public class GameMaster : MonoBehaviour
     public Throwing playerBoxes;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timeText;
+    
     private void Start()
     {
         score = 0;
