@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 public class GameMaster : MonoBehaviour
 {
 
@@ -42,6 +44,7 @@ public class GameMaster : MonoBehaviour
         txtTime_txt.GetComponent<TextMeshProUGUI>().text = txtTime.GetComponent<TextMeshProUGUI>().text;
         txtDel.GetComponent<TextMeshProUGUI>().text = (playerBoxes.maxPackg - playerBoxes.pckgCount).ToString() + "/" + playerBoxes.maxPackg.ToString();
     }
+
 
     public void RestarLevel()
     {

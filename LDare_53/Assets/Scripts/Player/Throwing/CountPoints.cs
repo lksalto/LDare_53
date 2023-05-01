@@ -86,7 +86,6 @@ public class CountPoints : MonoBehaviour
 
         if (other.gameObject.CompareTag("PickupSphere") && canPick && undetect > 1f)
         {
-            
             Destroy(gameObject);
         }
 

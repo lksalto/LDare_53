@@ -87,12 +87,14 @@ public class PlayerMov3D : MonoBehaviour
             isOnGrass = false;
             isOnRoad = true;
             moveSpeed = 10;
+            animator.speed = 1f;
         }
         else if(Physics.BoxCast(transform.position, boxSize, -transform.up, transform.rotation, maxDistance, grassLayer))
         {
             isOnRoad = false;
             isOnGrass = true;
             moveSpeed = 6;
+            animator.speed = 0.5f;
         }
 
     }
