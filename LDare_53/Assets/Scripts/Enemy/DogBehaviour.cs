@@ -9,6 +9,14 @@ public class DogBehaviour : MonoBehaviour
     private Vector3 homePoint;
     private Animator dogAnimator;
     private BoxCollider dogCollider;
+
+    bool isFacingLeft;
+    SpriteRenderer dogSprite;
+
+    [SerializeField] float x;
+    [SerializeField] float y;
+    [SerializeField] float z;
+
     enum states {IDLE, PATROL, CHASE}
     states state;
 
@@ -16,7 +24,7 @@ public class DogBehaviour : MonoBehaviour
         dog = GetComponent<NavMeshAgent>();
 
         dogAnimator = GetComponentInChildren<Animator>();
-
+        dogSprite = GetComponentInChildren<SpriteRenderer>();
         homePoint = transform.position;
         state = states.IDLE;
     }
@@ -32,6 +40,9 @@ public class DogBehaviour : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         if(other.gameObject.tag == "Player"){
             //Debug.Log("I see you mailman");
+            dogAnimator.SetBool("isChasing", true);
+            dogAnimator.SetBool("isGoingHome", false);
+            dogAnimator.speed = 1f;
             dog.speed = 15;
             dog.SetDestination(other.gameObject.transform.position);
         }
@@ -41,6 +52,9 @@ public class DogBehaviour : MonoBehaviour
         if(other.gameObject.tag == "Player"){
             state = states.PATROL;
             //Debug.Log("Must've been the wind");
+            dogAnimator.SetBool("isChasing", false);
+            dogAnimator.SetBool("isGoingHome", true);
+            dogAnimator.speed = 0.8f;
             dog.speed = 10;
             StartCoroutine(Patrulhar());
         }
@@ -83,4 +97,19 @@ public class DogBehaviour : MonoBehaviour
         StopAllCoroutines();
         dog.SetDestination(homePoint);
     }
+
+    private void Update()
+    {
+        if (dog.velocity.x < 0f && !isFacingLeft)
+        {
+            isFacingLeft = true;
+            dogSprite.flipX = true;
+        }
+        else if (dog.velocity.x > 0f && isFacingLeft)
+        {
+            isFacingLeft = false;
+            dogSprite.flipX = false;
+        }
+    }
+
 }
