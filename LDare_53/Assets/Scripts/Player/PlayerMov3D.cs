@@ -11,8 +11,8 @@ public class PlayerMov3D : MonoBehaviour
     Animator animator;
     bool isFacingLeft;
 
-    [SerializeField] GameObject horShadow;
-    [SerializeField] GameObject verShadow;
+    public GameObject horShadow;
+    public GameObject verShadow;
     [SerializeField] float moveSpeed;
     [SerializeField] bool isOnRoad;
     [SerializeField] bool isOnGrass;
