@@ -30,6 +30,7 @@ public class Throwing : MonoBehaviour
         //audSource = GetComponent<AudioSource>();
         chargeBar.fillAmount = 0f;
     }
+
     void Update()
     {
         gm.CountTotalBoxes(pckgCount, maxPackg);
@@ -58,20 +59,24 @@ public class Throwing : MonoBehaviour
             if(pckgCount > 0)
             {
                 audSourceCharge.Stop();
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                Rigidbody rb = projectile.GetComponent<Rigidbody>();
-                Vector3 direction = GetDirectionToMouse();
-                rb.AddForce(direction * (chargeBar.fillAmount) * 3 * throwForce);
+                ThrowBox(3);
                 chargeTimer = 0f;
                 chargeBar.color = minChargeColor;
                 chargeBar.fillAmount = 0;
                 PlayThrowClip();
-                pckgCount--;
-                
             }
 
         }
     }
+
+    public void ThrowBox(float strenght){
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        Vector3 direction = GetDirectionToMouse();
+        rb.AddForce(direction * (chargeBar.fillAmount) * strenght * throwForce);
+        pckgCount--;
+    }
+
     private Vector3 GetDirectionToMouse()
     {
         Vector3 mousePos = Input.mousePosition;
