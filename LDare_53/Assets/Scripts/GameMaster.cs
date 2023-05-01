@@ -41,7 +41,7 @@ public class GameMaster : MonoBehaviour
     {
         UIDefault.SetActive(false);
         endScreen.SetActive(true);
-        txtTime_txt.GetComponent<TextMeshProUGUI>().text = txtTime.GetComponent<TextMeshProUGUI>().text;
+        txtTime_txt.GetComponent<TextMeshProUGUI>().text = timeText.GetComponent<TextMeshProUGUI>().text + "s";
         txtDel.GetComponent<TextMeshProUGUI>().text = (playerBoxes.maxPackg - playerBoxes.pckgCount).ToString() + "/" + playerBoxes.maxPackg.ToString();
     }
 
