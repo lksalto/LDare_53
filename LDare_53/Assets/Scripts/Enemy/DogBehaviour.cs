@@ -10,6 +10,7 @@ public class DogBehaviour : MonoBehaviour
     private Animator dogAnimator;
     private BoxCollider dogCollider;
 
+    public float dogSpeed = 8;
     bool isFacingLeft;
     SpriteRenderer dogSprite;
 
@@ -22,6 +23,7 @@ public class DogBehaviour : MonoBehaviour
 
     void Start(){
         dog = GetComponent<NavMeshAgent>();
+        dog.speed = dogSpeed;
 
         dogAnimator = GetComponentInChildren<Animator>();
         dogSprite = GetComponentInChildren<SpriteRenderer>();
@@ -43,7 +45,6 @@ public class DogBehaviour : MonoBehaviour
             dogAnimator.SetBool("isChasing", true);
             dogAnimator.SetBool("isGoingHome", false);
             dogAnimator.speed = 1f;
-            dog.speed = 15;
             dog.SetDestination(other.gameObject.transform.position);
         }
     }
@@ -55,7 +56,6 @@ public class DogBehaviour : MonoBehaviour
             dogAnimator.SetBool("isChasing", false);
             dogAnimator.SetBool("isGoingHome", true);
             dogAnimator.speed = 0.8f;
-            dog.speed = 10;
             StartCoroutine(Patrulhar());
         }
     }
