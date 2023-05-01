@@ -12,11 +12,12 @@ public class CountPoints : MonoBehaviour
     [SerializeField] float maxCount = 1.3f;
     Throwing playerSound;
     private float undetect = 0f;
-
+    [SerializeField] GameMaster gm;
     float count;
     MissionManager missionScript;
     void Start()
     {
+        gm = FindObjectOfType<GameMaster>();
         playerSound = FindObjectOfType<Throwing>();
         rb = GetComponent<Rigidbody>();
         missionScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<MissionManager>();
@@ -46,6 +47,10 @@ public class CountPoints : MonoBehaviour
             missionScript.numberOfDeliveries--;
             missionScript.ResetHouseSprite();
             missionScript.GenerateNextHouse();
+            if(playerSound.pckgCount == 0 )
+            {
+                gm.FinishGame();
+            }
         }
         if (hasPicked)
         {
@@ -81,7 +86,6 @@ public class CountPoints : MonoBehaviour
 
         if (other.gameObject.CompareTag("PickupSphere") && canPick && undetect > 1f)
         {
-            
             Destroy(gameObject);
         }
 
