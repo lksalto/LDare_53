@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+
 public class GameMaster : MonoBehaviour
 {
 
@@ -23,10 +25,14 @@ public class GameMaster : MonoBehaviour
         timeText.text = Mathf.FloorToInt(time).ToString();
     }
 
-
     public void CountTotalBoxes(int number, int max)
     {
         scoreText.text = number.ToString() + "/" + max.ToString();
+    }
+
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 

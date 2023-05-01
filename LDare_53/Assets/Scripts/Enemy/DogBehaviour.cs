@@ -7,11 +7,16 @@ public class DogBehaviour : MonoBehaviour
 {
     private NavMeshAgent dog;
     private Vector3 homePoint;
+    private Animator dogAnimator;
+    private BoxCollider dogCollider;
     enum states {IDLE, PATROL, CHASE}
     states state;
 
     void Start(){
         dog = GetComponent<NavMeshAgent>();
+
+        dogAnimator = GetComponentInChildren<Animator>();
+
         homePoint = transform.position;
         state = states.IDLE;
     }
@@ -69,7 +74,7 @@ public class DogBehaviour : MonoBehaviour
     }
 
     private IEnumerator AwarenessTimer(){
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(10f); // adjust as needed
         BackToIdle();
     }
 
@@ -78,5 +83,4 @@ public class DogBehaviour : MonoBehaviour
         StopAllCoroutines();
         dog.SetDestination(homePoint);
     }
-
 }
