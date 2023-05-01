@@ -15,6 +15,10 @@ public class CountPoints : MonoBehaviour
     [SerializeField] GameMaster gm;
     float count;
     MissionManager missionScript;
+
+    public float dogSpawnChance;
+    public GameObject dog;
+
     void Start()
     {
         gm = FindObjectOfType<GameMaster>();
@@ -35,8 +39,6 @@ public class CountPoints : MonoBehaviour
         {
             canPick = true;
         }
-        
-
     }
 
     private void OnDestroy()
@@ -51,6 +53,7 @@ public class CountPoints : MonoBehaviour
             {
                 gm.FinishGame();
             }
+
         }
         if (hasPicked)
         {
@@ -65,6 +68,10 @@ public class CountPoints : MonoBehaviour
             count += Time.deltaTime;
             if(count > maxCount)
             {
+                if(Random.Range(0, 100) <= dogSpawnChance){
+                    Debug.Log("Cachorro");
+                    Instantiate(dog, this.GetComponent<Transform>().position, Quaternion.identity);
+                }
                 Destroy(gameObject);
             }
 

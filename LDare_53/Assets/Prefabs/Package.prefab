@@ -172,6 +172,8 @@ MonoBehaviour:
   target: {fileID: 301549934844341813, guid: 02a1466646fb0654bbbe60ac2fde4581, type: 3}
   maxCount: 1.3
   gm: {fileID: 0}
+  dogSpawnChance: 100
+  dog: {fileID: 2458620460802050736, guid: abc27250d935ca82e937d8d60a81ee04, type: 3}
 --- !u!82 &-1201263236682453885
 AudioSource:
   m_ObjectHideFlags: 0

@@ -63,7 +63,8 @@ public class Throwing : MonoBehaviour
             if (pckgCount > 0)
             {
                 audSourceCharge.Stop();
-                ThrowBox(3);
+                Vector3 direction = GetDirectionToMouse();
+                ThrowBox(direction, 3);
                 chargeTimer = 0f;
                 chargeBar.color = minChargeColor;
                 chargeBar.fillAmount = 0;
@@ -73,10 +74,9 @@ public class Throwing : MonoBehaviour
         }
     }
 
-    public void ThrowBox(float strenght){
+    public void ThrowBox(Vector3 direction, float strenght){
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        Vector3 direction = GetDirectionToMouse();
         rb.AddForce(direction * (chargeBar.fillAmount) * strenght * throwForce);
         pckgCount--;
     }
