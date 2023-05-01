@@ -46,7 +46,7 @@ public class GameMaster : MonoBehaviour
     }
 
 
-    public void RestarLevel()
+    public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

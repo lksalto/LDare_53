@@ -11,7 +11,8 @@ public class PlayerMov3D : MonoBehaviour
     Animator animator;
     bool isFacingLeft;
 
-
+    [SerializeField] Sprite horShadow;
+    [SerializeField] Sprite verShadow;
     [SerializeField] float moveSpeed;
     [SerializeField] bool isOnRoad;
     [SerializeField] bool isOnGrass;
@@ -22,6 +23,7 @@ public class PlayerMov3D : MonoBehaviour
     [SerializeField] LayerMask roadLayer;
 
     SpriteRenderer playerSprite;
+    SpriteRenderer shadowSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class PlayerMov3D : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
+        shadowSprite = GameObject.FindGameObjectWithTag("Shadow").GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -68,6 +71,15 @@ public class PlayerMov3D : MonoBehaviour
         {
             isFacingLeft = false;
             FlipPlayer();
+        }
+
+        if(animator.GetBool("IsHorizontal"))
+        {
+            shadowSprite.sprite = horShadow;
+        }
+        else
+        {
+            shadowSprite.sprite = verShadow;
         }
 
         //playerRb.AddForce(moveDirection * moveSpeed * 100f * Time.deltaTime, ForceMode.Force);
