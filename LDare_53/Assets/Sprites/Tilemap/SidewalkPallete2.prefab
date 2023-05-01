@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 6504460951323702488}
   - component: {fileID: 5163635924867116631}
   m_Layer: 0
-  m_Name: SidewalkPallete
+  m_Name: SidewalkPallete2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
