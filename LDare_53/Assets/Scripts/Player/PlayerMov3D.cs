@@ -8,6 +8,9 @@ public class PlayerMov3D : MonoBehaviour
     Vector2 input;
     Rigidbody playerRb;
     Vector3 moveDirection;
+    Animator animator;
+    bool isFacingLeft;
+
 
     [SerializeField] float moveSpeed;
     [SerializeField] bool isOnRoad;
@@ -18,10 +21,14 @@ public class PlayerMov3D : MonoBehaviour
     [SerializeField] LayerMask grassLayer;
     [SerializeField] LayerMask roadLayer;
 
+    SpriteRenderer playerSprite;
+
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+        playerSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -34,10 +41,44 @@ public class PlayerMov3D : MonoBehaviour
     private void FixedUpdate()
     {
         moveDirection = new Vector3(input.x, 0f, input.y).normalized;
+        if (input.x != 0f)
+        {
+            animator.SetBool("IsHorizontal", true);
+        }
+        else
+        {
+            animator.SetBool("IsHorizontal", false);
+        }
+        if (input.y > 0f)
+            animator.SetBool("IsFacingUp", true);
+        else if (input.y < 0f)
+            animator.SetBool("IsFacingUp", false);
+
+        if (input.x == 0f && input.y == 0f)
+            animator.SetBool("IsIdle", true);
+        else
+            animator.SetBool("IsIdle", false);
+
+        if (input.x < 0f && !isFacingLeft)
+        {
+            isFacingLeft = true;
+            FlipPlayer();
+        }
+        else if (input.x > 0f && isFacingLeft)
+        {
+            isFacingLeft = false;
+            FlipPlayer();
+        }
+
         //playerRb.AddForce(moveDirection * moveSpeed * 100f * Time.deltaTime, ForceMode.Force);
         playerRb.velocity = moveDirection * moveSpeed;
     }
 
+    private void FlipPlayer()
+    {
+        // Rotate around y axis
+        playerSprite.transform.Rotate(0f, 180f, 0f);
+    }
 
     void GroundCheck()
     {
