@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  time: 70
+  time: 100
   boxes: 0
   playerBoxes: {fileID: 8731486071269953166}
   scoreText: {fileID: 0}
@@ -498,8 +498,8 @@ MonoBehaviour:
   moveSpeed: 11
   isOnRoad: 0
   isOnGrass: 0
-  particleVer: {fileID: 36686511110803616}
-  particleHor: {fileID: 36686509560804604}
+  particleVer: {fileID: 36686511110803622}
+  particleHor: {fileID: 36686509560804602}
   boxSize: {x: 0.1, y: 0.1, z: 0.1}
   maxDistance: 1
   grassLayer:
@@ -1136,7 +1136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 36686510167274533, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 36686510167274533, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1176,14 +1176,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
---- !u!198 &36686511110803616 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 36686510167274532, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
-  m_PrefabInstance: {fileID: 945775748}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &36686511110803617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 36686510167274533, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
+  m_PrefabInstance: {fileID: 945775748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &36686511110803622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 36686510167274530, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
   m_PrefabInstance: {fileID: 945775748}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1694105816
@@ -1259,9 +1259,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
---- !u!198 &36686509560804604 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 36686510167274532, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
+--- !u!1 &36686509560804602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 36686510167274530, guid: 7b58a1929e0c5c04ab8a18b6d875d916, type: 3}
   m_PrefabInstance: {fileID: 1694105816}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &36686509560804605 stripped

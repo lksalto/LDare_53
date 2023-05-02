@@ -17,8 +17,8 @@ public class PlayerMov3D : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] bool isOnRoad;
     [SerializeField] bool isOnGrass;
-    [SerializeField] ParticleSystem particleVer;
-    [SerializeField] ParticleSystem particleHor;
+    [SerializeField] GameObject particleVer;
+    [SerializeField] GameObject particleHor;
 
     [SerializeField] Vector3 boxSize;
     [SerializeField] float maxDistance;
@@ -30,6 +30,7 @@ public class PlayerMov3D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         playerRb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
@@ -85,15 +86,21 @@ public class PlayerMov3D : MonoBehaviour
         }
         if(animator.GetBool("IsHorizontal"))
         {
-            verShadow.SetActive(false);
             horShadow.SetActive(true);
-            particleHor.Play();
+            verShadow.SetActive(false);
+            particleHor.SetActive(true);
         }
         else if(!animator.GetBool("IsIdle"))
         {
-            horShadow.SetActive(false);
             verShadow.SetActive(true);
-            particleVer.Play();
+            horShadow.SetActive(false);
+            particleVer.SetActive(true);
+        }
+
+        if (animator.GetBool("IsIdle"))
+        {
+            particleHor.SetActive(false);
+            particleVer.SetActive(false);
         }
 
         //playerRb.AddForce(moveDirection * moveSpeed * 100f * Time.deltaTime, ForceMode.Force);

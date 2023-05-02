@@ -54,7 +54,9 @@ public class GameMaster : MonoBehaviour
         endScreen.SetActive(true);
         txtTime_txt.GetComponent<TextMeshProUGUI>().text = timeText.GetComponent<TextMeshProUGUI>().text + "s";
         txtDel.GetComponent<TextMeshProUGUI>().text = (playerBoxes.maxPackg - playerBoxes.pckgCount).ToString() + "/" + playerBoxes.maxPackg.ToString();
+        Time.timeScale = 0f;
     }
+
 
     public void FailLevel()
     {
@@ -62,6 +64,7 @@ public class GameMaster : MonoBehaviour
         failScreen.SetActive(true);
         txtTime_txt.GetComponent<TextMeshProUGUI>().text = timeText.GetComponent<TextMeshProUGUI>().text + "s";
         txtDel.GetComponent<TextMeshProUGUI>().text =  playerBoxes.pckgCount.ToString() + "/" + playerBoxes.maxPackg.ToString();
+        Time.timeScale = 0f;
     }
 
 
@@ -73,5 +76,10 @@ public class GameMaster : MonoBehaviour
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 }
