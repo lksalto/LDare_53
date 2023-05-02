@@ -10,12 +10,15 @@ public class PlayerMov3D : MonoBehaviour
     Vector3 moveDirection;
     Animator animator;
     bool isFacingLeft;
+    bool isFacingUp;
 
     public GameObject horShadow;
     public GameObject verShadow;
     [SerializeField] float moveSpeed;
     [SerializeField] bool isOnRoad;
     [SerializeField] bool isOnGrass;
+    [SerializeField] ParticleSystem particleVer;
+    [SerializeField] ParticleSystem particleHor;
 
     [SerializeField] Vector3 boxSize;
     [SerializeField] float maxDistance;
@@ -70,16 +73,27 @@ public class PlayerMov3D : MonoBehaviour
             isFacingLeft = false;
             FlipPlayer();
         }
-
+        if(input.y > 0f && !isFacingUp)
+        {
+            isFacingUp = true;
+            FlipShadow();
+        }
+        else if(input.y < 0f && isFacingUp)
+        {
+            isFacingUp = false;
+            FlipShadow();
+        }
         if(animator.GetBool("IsHorizontal"))
         {
             verShadow.SetActive(false);
             horShadow.SetActive(true);
+            particleHor.Play();
         }
         else if(!animator.GetBool("IsIdle"))
         {
             horShadow.SetActive(false);
             verShadow.SetActive(true);
+            particleVer.Play();
         }
 
         //playerRb.AddForce(moveDirection * moveSpeed * 100f * Time.deltaTime, ForceMode.Force);
@@ -90,6 +104,12 @@ public class PlayerMov3D : MonoBehaviour
     {
         // Rotate around y axis
         playerSprite.transform.Rotate(0f, 180f, 0f);
+        horShadow.transform.Rotate(0f, 180f, 0f);
+    }
+
+    private void FlipShadow()
+    {
+        verShadow.transform.Rotate(180f, 0f, 0f);
     }
 
     void GroundCheck()

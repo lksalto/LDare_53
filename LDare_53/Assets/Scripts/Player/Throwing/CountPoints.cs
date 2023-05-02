@@ -16,7 +16,7 @@ public class CountPoints : MonoBehaviour
     float count;
     MissionManager missionScript;
 
-    public float dogSpawnChance;
+    private float dogSpawnChance = 65f;
     public GameObject dog;
 
     void Start()
