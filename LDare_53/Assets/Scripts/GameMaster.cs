@@ -33,7 +33,7 @@ public class GameMaster : MonoBehaviour
 
         if(Mathf.FloorToInt(time) == 0 )
         {
-            FinishGame();
+            FailLevel();
         }
         else
         {
