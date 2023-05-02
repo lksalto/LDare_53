@@ -29,8 +29,18 @@ public class GameMaster : MonoBehaviour
     }
     private void Update()
     {
-        time -= Time.deltaTime;
-        timeText.text = Mathf.FloorToInt(time).ToString();
+
+
+        if(Mathf.FloorToInt(time) == 0 )
+        {
+            FinishGame();
+        }
+        else
+        {
+            time -= Time.deltaTime;
+            timeText.text = Mathf.FloorToInt(time).ToString();
+        }
+
     }
 
     public void CountTotalBoxes(int number, int max)
