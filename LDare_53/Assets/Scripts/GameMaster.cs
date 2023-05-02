@@ -17,6 +17,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] GameObject UIDefault;
     [SerializeField] GameObject endScreen;
+    [SerializeField] GameObject failScreen;
     [SerializeField] GameObject txtTime_txt;
     [SerializeField] GameObject txtTime;
     [SerializeField] GameObject txtDel;
@@ -53,6 +54,14 @@ public class GameMaster : MonoBehaviour
         endScreen.SetActive(true);
         txtTime_txt.GetComponent<TextMeshProUGUI>().text = timeText.GetComponent<TextMeshProUGUI>().text + "s";
         txtDel.GetComponent<TextMeshProUGUI>().text = (playerBoxes.maxPackg - playerBoxes.pckgCount).ToString() + "/" + playerBoxes.maxPackg.ToString();
+    }
+
+    public void FailLevel()
+    {
+        UIDefault.SetActive(false);
+        failScreen.SetActive(true);
+        txtTime_txt.GetComponent<TextMeshProUGUI>().text = timeText.GetComponent<TextMeshProUGUI>().text + "s";
+        txtDel.GetComponent<TextMeshProUGUI>().text =  playerBoxes.pckgCount.ToString() + "/" + playerBoxes.maxPackg.ToString();
     }
 
 

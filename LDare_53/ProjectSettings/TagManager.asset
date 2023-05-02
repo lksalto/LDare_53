@@ -16,6 +16,7 @@ TagManager:
   - PickupSphere
   - Yard
   - Shadow
+  - GameMaster
   layers:
   - Default
   - TransparentFX
